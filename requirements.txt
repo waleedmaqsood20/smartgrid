@@ -1,0 +1,7 @@
+cryptography==44.0.2
+matplotlib==3.10.1
+numpy==2.2.4
+psutil==7.0.0
+argparse==1.4.0
+markdown>=3.7
+tabulate>=0.8.9 
