@@ -97,16 +97,16 @@ class EvaluationMetrics:
                 elif metric_name == "processing_time":
                     self.nonsecure_processing_times.append(value)
             else:
-            if metric_name == "encryption_time":
-                self.encryption_times.append(value)
-            elif metric_name == "decryption_time":
-                self.decryption_times.append(value)
-            elif metric_name == "signature_time":
-                self.signature_times.append(value)
-            elif metric_name == "verification_time":
-                self.verification_times.append(value)
-            elif metric_name == "processing_time":
-                self.total_processing_times.append(value)
+                if metric_name == "encryption_time":
+                    self.encryption_times.append(value)
+                elif metric_name == "decryption_time":
+                    self.decryption_times.append(value)
+                elif metric_name == "signature_time":
+                    self.signature_times.append(value)
+                elif metric_name == "verification_time":
+                    self.verification_times.append(value)
+                elif metric_name == "processing_time":
+                    self.total_processing_times.append(value)
         except Exception as e:
             logger.error(f"Failed to record metric {metric_name}: {str(e)}")
             
@@ -378,7 +378,7 @@ class SmartGridEvaluator:
             
             # Send legitimate data first
             for _ in range(10):
-                    smart_meter.send_data(channel)
+                smart_meter.send_data(channel)
                 time.sleep(0.1)  # Small delay between packets
             
             # Get baseline failures
@@ -396,7 +396,7 @@ class SmartGridEvaluator:
                 channel[0] = tampered_packet
                 
                 # Send tampered packet
-                    control_center.receive_data(channel)
+                control_center.receive_data(channel)
                 
                 # Verify detection - count both decryption and signature failures
                 current_decryption_failures = control_center.decryption_failures
@@ -407,8 +407,8 @@ class SmartGridEvaluator:
                     results[attack_type]["detected"] += 1
                     self.metrics.detected_mitm_attacks += 1
                 results[attack_type]["total"] += 1
-                    self.metrics.total_mitm_tests += 1
-                    
+                self.metrics.total_mitm_tests += 1
+                
                 time.sleep(0.1)  # Small delay between packets
             
             # Calculate detection rate
@@ -604,9 +604,9 @@ class SmartGridEvaluator:
             duration = time.time() - start_time
             throughput = packets_sent / duration
                 
-                # Record metrics
+            # Record metrics
             self.metrics.dos_throughput = throughput
-                    self.metrics.record_system_stats()
+            self.metrics.record_system_stats()
                     
             # Log results
             self.logger.info(f"DoS attack test complete:")
@@ -723,7 +723,7 @@ class SmartGridEvaluator:
                 self.logger.error(f"Error running tests: {str(e)}")
                 return {"score": 0, "details": {}, "error": str(e)}
             
-        compliance = {
+            compliance = {
                 "encryption_strength": False,
                 "key_length": False,
                 "mitm_detection": False,
@@ -1492,7 +1492,7 @@ class SmartGridEvaluator:
                 continue  # Continue with next visualization even if one fails
         
         try:
-        self.generate_html_report()
+            self.generate_html_report()
         except Exception as e:
             logger.error(f"Error generating HTML report: {str(e)}")
         
